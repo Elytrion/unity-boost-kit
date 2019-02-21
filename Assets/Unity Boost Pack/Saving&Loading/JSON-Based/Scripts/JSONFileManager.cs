@@ -83,7 +83,7 @@ public static class JSONFileManager
     /// </summary>
     public static T GetObjectFromJSON<T>(string inFileName)
     {
-        return JsonUtility.FromJson<T>(GetJSONText(inFileName));
+        return JSONUtils.FromJSON<T>(GetJSONText(inFileName))[0];
     }
 
     /// <summary>
@@ -116,8 +116,6 @@ public static class JSONFileManager
     /// <summary>
     /// Gets the full path of a file
     /// </summary>
-    /// <param name="inFileName">Name of the file</param>
-    /// <returns></returns>
     private static string GetFullFilePath(string inFileName)
     {
         if (inFileName.Contains("/"))

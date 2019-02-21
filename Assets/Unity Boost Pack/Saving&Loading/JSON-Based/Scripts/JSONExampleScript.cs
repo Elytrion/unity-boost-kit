@@ -60,6 +60,13 @@ public class JSONExampleScript : MonoBehaviour
 
         //Deletes the file "/dataArray.json" and outputs "DELETED /dataArray.json" in the console
         JSONFileManager.DeleteJSONFile("/dataArray.json");
+
+        /* Pay attention to how I've been writing the file names as /fileName.json instead of just fileName
+         * This is because your file is saved as a file path, which requires the forward slash (/) and
+         * file extension (.json) to be found and be a valid file path
+         * (Note that JSONFileManager does automatically fix this issue, but it's still good
+         * practice to write the file name as stated)
+         */
     }
 }
 
