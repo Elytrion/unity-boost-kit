@@ -6,14 +6,14 @@ public class JSONExampleScript : MonoBehaviour
 {
     private void Start()
     {
-        DataPacket data1 = new DataPacket(1, "This is data packet 1");
-        DataPacket data2 = new DataPacket(2, "This is data packet 2");
-        DataPacket data3 = new DataPacket(3, "This is data packet 3");
-        DataPacket[] datas = new DataPacket[]
+        JSONExampleDataPacket data1 = new JSONExampleDataPacket(1, "This is data packet 1");
+        JSONExampleDataPacket data2 = new JSONExampleDataPacket(2, "This is data packet 2");
+        JSONExampleDataPacket data3 = new JSONExampleDataPacket(3, "This is data packet 3");
+        JSONExampleDataPacket[] datas = new JSONExampleDataPacket[]
         {
-            new DataPacket(4, "Hi, I'm in an array"),
-            new DataPacket(5, "Hey, I'm in an array too"),
-            new DataPacket(6, "Hello, I'm here")
+            new JSONExampleDataPacket(4, "Hi, I'm in an array"),
+            new JSONExampleDataPacket(5, "Hey, I'm in an array too"),
+            new JSONExampleDataPacket(6, "Hello, I'm here")
         };
 
         //creates a JSON file at Application.persistentDataPath from the DataPacket data1
@@ -26,8 +26,8 @@ public class JSONExampleScript : MonoBehaviour
         Debug.Log(JSONFileManager.DoesJSONFileExist("/data2.json"));
 
         //Displays "This is data packet 1" in the console, as we retrieved the data from the file
-        //(Remember to specify the object you want back, in this case, DataPacket)
-        Debug.Log(JSONFileManager.GetObjectFromJSON<DataPacket>("/data1.json").StringData);
+        //(Remember to specify the object you want back, in this case, JSONExampleDataPacket)
+        Debug.Log(JSONFileManager.GetObjectFromJSON<JSONExampleDataPacket>("/data1.json").StringData);
 
         //Deletes the file "/data1.json" and outputs "DELETED /data1.json" in the console
         JSONFileManager.DeleteJSONFile("/data1.json");
@@ -40,7 +40,7 @@ public class JSONExampleScript : MonoBehaviour
 
         //Outputs the IntData and StringData from the two data packets in the file
         //Example "3, This is data packet 3"
-        foreach (DataPacket data in JSONFileManager.GetObjectsFromJSON<DataPacket>("/data2.json"))
+        foreach (JSONExampleDataPacket data in JSONFileManager.GetObjectsFromJSON<JSONExampleDataPacket>("/data2.json"))
         {
             Debug.Log(data.IntData + ", " + data.StringData);
         }
@@ -53,7 +53,7 @@ public class JSONExampleScript : MonoBehaviour
 
         //Outputs the IntData and StringData from each DataPacket in the array to the console
         //Example "6, Hello, I'm here"
-        foreach (DataPacket data in JSONFileManager.GetObjectsFromJSON<DataPacket>("/dataArray.json"))
+        foreach (JSONExampleDataPacket data in JSONFileManager.GetObjectsFromJSON<JSONExampleDataPacket>("/dataArray.json"))
         {
             Debug.Log(data.IntData + ", " + data.StringData);
         }
@@ -74,12 +74,12 @@ public class JSONExampleScript : MonoBehaviour
 //although this can be changed for whatever you plan to use as your data container
 //Note: The object MUST be serializable
 [System.Serializable]
-public struct DataPacket
+public struct JSONExampleDataPacket
 {
     public int IntData;
     public string StringData;
 
-    public DataPacket (int inInt, string inStringData)
+    public JSONExampleDataPacket (int inInt, string inStringData)
     {
         IntData = inInt;
         StringData = inStringData;
