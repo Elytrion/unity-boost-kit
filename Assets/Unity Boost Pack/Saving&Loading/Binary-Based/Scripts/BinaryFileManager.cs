@@ -10,6 +10,7 @@ public static class BinaryFileManager
     //Change this to change the directory where saved files will go
     public static string DEFAULT_FILE_PATH = Application.persistentDataPath;
 
+    //Change this to change the default file type (try not to use preexisting file extensions like .exe or .jpg etc.)
     public const string DEFAULT_FILE_EXTENSION = ".custom";
 
     /// <summary>
@@ -48,17 +49,6 @@ public static class BinaryFileManager
     }
 
     /// <summary>
-    /// Adds a specified object to a specified binary file
-    /// </summary>
-    public static void AddToBinaryFile<T>(T inObjectToSave, string inFileName, string inFileExtension = DEFAULT_FILE_EXTENSION)
-    {
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream stream = new FileStream(GetFullFilePath(inFileName, inFileExtension), FileMode.Append);
-        bf.Serialize(stream, inObjectToSave);
-        stream.Close();
-    }
-
-    /// <summary>
     /// Returns a specified object from a binary file
     /// </summary>
     public static T GetObjectFromBinaryFile<T>(string inFileName, string inFileExtension = DEFAULT_FILE_EXTENSION)
@@ -70,6 +60,9 @@ public static class BinaryFileManager
         return objectFromFile;
     }
 
+    /// <summary>
+    /// Gets the full path of a file
+    /// </summary>
     private static string GetFullFilePath(string inFileName, string inFileExtension)
     {
         if (!inFileExtension.Contains("."))
